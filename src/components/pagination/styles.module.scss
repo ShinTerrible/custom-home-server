@@ -1,0 +1,17 @@
+.pagination-container {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	flex-wrap: nowrap;
+}
+
+.pagination-state {
+	display: block;
+	font-family: 'Open Sans', sans-serif;
+	color: rgb(255, 255, 255);
+	font-size: 16px;
+}
+
+.pagination-button_props {
+	box-sizing: border-box;
+}

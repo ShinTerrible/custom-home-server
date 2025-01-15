@@ -1,0 +1,88 @@
+.film-list_item {
+	display: flex;
+	flex-direction: column;
+	padding: 0.2rem;
+	background-color: rgb(255, 255, 255);
+	border: 0.5px solid rgb(75, 74, 74);
+	border-radius: 0.5rem;
+	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+		drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+	box-shadow: 0px 2px 8px rgb(20, 87, 154);
+}
+
+.film_list_position {
+	padding: 2px;
+	display: grid;
+	grid-template-columns: 1fr;
+	grid-template-rows: 2fr 0.4fr 0.4fr 0.4fr;
+	grid-column-gap: 5px;
+	grid-row-gap: 5px;
+	font-family: 'Open Sans', sans-serif;
+}
+
+.label {
+	font-weight: 300;
+	overflow: hidden;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp: 3;
+	text-overflow: ellipsis;
+	// margin-block-start: 5px;
+}
+
+.sids,
+.size,
+.forum,
+.label {
+	font-family: inherit;
+	font-size: 14px;
+	line-height: 1rem; /* 16px */
+}
+
+.button_container {
+	display: flex;
+	flex-direction: row;
+	justify-content: end;
+	gap: 7px;
+	margin-block-start: 5px;
+}
+
+.download-button,
+.open_button {
+	font-family: 'Open Sans', sans-serif;
+	width: 20%;
+	background-color: rgba(26, 109, 192);
+	color: white;
+	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
+		drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: center;
+	gap: 5px;
+}
+
+.download-button:active,
+.open_button:active {
+	background-color: rgba(26, 109, 192, 0.6);
+	color: black;
+}
+
+.download-button:focus,
+.open_button:focus {
+	background-color: rgba(26, 109, 192, 0.6);
+	color: black;
+}
+
+.icon {
+	width: 20px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: auto;
+	filter: invert(1);
+}
+
+.download-button_click {
+	background-color: rgba(55, 132, 208, 0.28);
+}

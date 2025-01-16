@@ -43,7 +43,7 @@ export const FilmListContainer: FC = () => {
 		} catch (err) {
 			console.log(err)
 		} finally {
-			// navigate(`/${id}`)
+			navigate(`/${id}`)
 		}
 		return
 	}

@@ -18,11 +18,11 @@ export type IFilmData = {
 }
 
 export type ISearchData = {
-	rows: IFilmData[]
-	page: number
-	total_pages: number
-	total_founded_rows: number
-	search_id: string
+	rows: IFilmData[] | undefined
+	page: number | undefined
+	total_pages: number | undefined
+	total_founded_rows: number | undefined
+	search_id: string | undefined
 }
 
 export type IFilmView = {
@@ -45,7 +45,6 @@ export const getSearchApi = (query: string) => {
 		.then((res) => checkResponse<ISearchData>(res))
 		.then((data) => {
 			if (data) return data
-			return Promise.reject(data)
 		})
 }
 
@@ -54,7 +53,7 @@ export const getSearchIdDataApi = (id: string, page: number) => {
 	return fetch(`${URL}/v1/search/${id}/${page}`)
 		.then((res) => checkResponse<ISearchData>(res))
 		.then((data) => {
-			data ? data : Promise.reject(data)
+			return data
 		})
 }
 

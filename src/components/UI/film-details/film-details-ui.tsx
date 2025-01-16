@@ -1,17 +1,27 @@
 import { memo } from 'react'
 import { FC } from 'react'
-import { getDownloadApi, IFilmViewUI } from '../../utils/api'
 import style from './style.module.scss'
-import { ContentContainer } from '../container/container'
+import { ContentContainer } from '../../container/container'
 
-import { ButtonUI } from '../button/button'
+import { ButtonUI } from '../../button/button'
 import backSVG from '../../assets/images/back-01.svg'
 import downloadSVG from '../../assets/images/dwnld1.svg'
 import { useNavigate } from 'react-router-dom'
+import { useDispatch } from '../../../services/store'
+import { resetFilmData } from '../../../slices/film-data/filmData'
 
-export const FilmDetailsUI: FC<IFilmViewUI> = memo(
-	({ title, body, image_bs64, id }) => {
+type TFilmDataProps = {
+	title: string
+	body: string
+	image_bs64: string
+	onDownload: () => void
+}
+
+export const FilmDetailsUI: FC<TFilmDataProps> = memo(
+	({ title, body, image_bs64, onDownload }) => {
 		const navigate = useNavigate()
+		const dispatch = useDispatch()
+
 		const onConvertBody = () => {
 			let bodyData = body.split('\n').filter((element) => element !== '')
 
@@ -29,11 +39,7 @@ export const FilmDetailsUI: FC<IFilmViewUI> = memo(
 				)
 			})
 		}
-
-		const onDownload = async () => {
-			return await getDownloadApi(id)
-		}
-
+		
 		return (
 			<div className={style.filmContainer}>
 				<ContentContainer>
@@ -42,6 +48,7 @@ export const FilmDetailsUI: FC<IFilmViewUI> = memo(
 							<ButtonUI
 								title={''}
 								onClick={() => {
+									dispatch(resetFilmData())
 									navigate('/')
 								}}
 								styleProps={style.backButton}

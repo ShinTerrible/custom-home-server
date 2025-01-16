@@ -1,14 +1,15 @@
-import React, { useState } from 'react'
+import React from 'react'
 import style from './styles.module.scss'
 import infoSVG from '../../assets/images/info-01.svg'
-import { store } from '../../services/store'
-import { useStore } from '@tanstack/react-store'
+import { useSelector } from '../../services/store'
+
+import { getPopupState } from '../../slices/popup/popup'
 
 export const Popup = (): React.ReactElement => {
-	let states = useStore(store, (state) => state.popupState)
+	const state = useSelector(getPopupState)
 
 	return (
-		<div className={`${style.popup} ${states === true ? '' : style.isClosed}`}>
+		<div className={`${style.popup} ${state === true ? '' : style.isClosed}`}>
 			<img src={infoSVG} className={style.popupIcon}></img>
 			<span className={style.popupInfo}>Торрент скачивается</span>
 		</div>

@@ -1,8 +1,8 @@
 import style from './styles.module.scss'
-import { ButtonUI } from '../button/button'
-import downloadSVG from '../../assets/images/dwnld1.svg'
-import openSVG from '../../assets/images/open-01.svg'
-import { memo, useMemo } from 'react'
+import { ButtonUI } from '../../button/button'
+import downloadSVG from '../../../assets/images/dwnld1.svg'
+import openSVG from '../../../assets/images/open-01.svg'
+import { memo } from 'react'
 
 type FilmListProps = {
 	forum: string

@@ -1,5 +1,10 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
-import { getSearchApi, ISearchData } from '../../utils/api'
+import {
+	getSearchApi,
+	getSearchIdDataApi,
+	IFilmData,
+	ISearchData,
+} from '../../utils/api'
 import { PayloadAction } from '@reduxjs/toolkit'
 
 interface SerializedError {
@@ -13,20 +18,7 @@ type Error = {
 	error: SerializedError | undefined | string
 }
 export const initialState: ISearchData & Error = {
-	rows: [
-		{
-			forum: '',
-			label: '',
-			author: '',
-			size: '',
-			size_bytes: 0,
-			sids: 0,
-			leeches: 0,
-			downloaded_times: 0,
-			created: '',
-			content_id: '',
-		},
-	],
+	rows: undefined,
 	page: 0,
 	total_pages: 0,
 	total_founded_rows: 0,
@@ -40,15 +32,17 @@ export const getSearchData = createAsyncThunk(
 	getSearchApi
 )
 
+export const getSearchIdData = createAsyncThunk(
+	'searchIdData/getSearchIdData',
+	getSearchIdDataApi
+)
+
 export const searchData = createSlice({
 	name: 'searchData',
 	initialState,
 	reducers: {
-		updateSearchData: (
-			state,
-			{ payload }: PayloadAction<ISearchData & Error>
-		) => {
-			state = payload
+		updateSearchData: (state, { payload }: PayloadAction<IFilmData[]>) => {
+			state.rows = payload
 		},
 		resetSearchData: () => initialState,
 	},
@@ -64,15 +58,30 @@ export const searchData = createSlice({
 			})
 			.addCase(getSearchData.rejected, (state, { error }) => {
 				state.error = error.message
-			})
+			}),
+			builder
+				.addCase(getSearchIdData.fulfilled, (state, { payload }) => {
+					state = { ...payload, error: undefined }
+				})
+				.addCase(getSearchIdData.rejected, (state, { error }) => {
+					state.error = error.message
+				})
 	},
 	selectors: {
 		getSearchDataState: (state) => state,
-		getFilms: (state) => state.rows,
+		getFilms: (state) => state.rows as [],
+		getTotalPages: (state) => state.total_pages,
+		getTotalPagesRows: (state) => state.total_founded_rows,
 		getSearchID: (state) => state.search_id,
 	},
 })
 
-export const { getSearchDataState, getFilms } = searchData.selectors
+export const {
+	getSearchDataState,
+	getFilms,
+	getTotalPages,
+	getTotalPagesRows,
+	getSearchID,
+} = searchData.selectors
 export const { updateSearchData, resetSearchData } = searchData.actions
 export default searchData.reducer

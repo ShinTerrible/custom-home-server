@@ -3,35 +3,33 @@ import filterSVG from '../../assets/images/sort-01.svg'
 import style from './styles.module.scss'
 import { ContentContainer } from '../container/container'
 import { useState } from 'react'
-import { store } from '../../services/store'
-import { useStore } from '@tanstack/react-store'
+import { useDispatch, useSelector } from '../../services/store'
 import { IFilmData } from '../../utils/api'
-import { updateSearchData } from '../../services/store'
+import { getFilms, updateSearchData } from '../../slices/search-data/searchData'
 
 enum OrderBy {
 	sids = 'sids',
-	size = 'size',
+	size = 'size_bytes',
 }
 
 export const SortUI = () => {
+	const dispatch = useDispatch()
 	const [isShown, setVisibility] = useState<boolean>(false)
-	let arr: IFilmData[] = useStore(store, (state) => state.searchData)
+	let arr = useSelector(getFilms)
 
 	const onSort = (condition: OrderBy) => {
-
 		let fieldName = condition as keyof IFilmData
+
 		const compare = (a: IFilmData, b: IFilmData) => {
-			if (Number(a[fieldName]) < Number(b[fieldName])) {
-				return -1
-			}
-			if (Number(a[fieldName]) > Number(b[fieldName])) {
-				return 1
-			}
+			let aConverted = a[fieldName]
+			let bConverted = b[fieldName]
+
+			if (aConverted < bConverted) return 1
+			if (aConverted > bConverted) return -1
 			return 0
 		}
 
-		arr.sort(compare)
-		updateSearchData(arr)
+		dispatch(updateSearchData(arr.toSorted(compare)))
 
 		return
 	}

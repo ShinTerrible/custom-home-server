@@ -49,7 +49,8 @@ export const getSearchApi = (query: string) => {
 }
 
 // // // search id data
-export const getSearchIdDataApi = (id: string, page: number) => {
+export const getSearchIdDataApi = (payload: { id: string; page: number }) => {
+	const { id, page } = payload
 	return fetch(`${URL}/v1/search/${id}/${page}`)
 		.then((res) => checkResponse<ISearchData>(res))
 		.then((data) => {

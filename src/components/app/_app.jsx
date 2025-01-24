@@ -1,10 +1,8 @@
 import {} from 'react-redux'
 import { ServerContainer } from '../server-container'
 import '../../index.css'
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools'
 import { Routes, Route, useLocation } from 'react-router-dom'
 import { FilmDetails } from '../film-details/film-details'
-
 
 export const App = () => {
 	const location = useLocation()
@@ -16,7 +14,6 @@ export const App = () => {
 				<Route path='/' element={<ServerContainer />} />
 				<Route path='/:id' element={<FilmDetails />} />
 			</Routes>
-			<ReactQueryDevtools />
 		</div>
 	)
 }

@@ -2,23 +2,24 @@ import { memo } from 'react'
 import { FC } from 'react'
 import style from './style.module.scss'
 import { ContentContainer } from '../../container/container'
-
 import { ButtonUI } from '../../button/button'
-import backSVG from '../../assets/images/back-01.svg'
-import downloadSVG from '../../assets/images/dwnld1.svg'
+import backSVG from '../../../assets/images/back-01.svg'
+import downloadSVG from '../../../assets/images/dwnld1.svg'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from '../../../services/store'
 import { resetFilmData } from '../../../slices/film-data/filmData'
+import { Preloader } from '../../preloader/preloader'
 
 type TFilmDataProps = {
 	title: string
 	body: string
 	image_bs64: string
 	onDownload: () => void
+	isLoading: boolean
 }
 
 export const FilmDetailsUI: FC<TFilmDataProps> = memo(
-	({ title, body, image_bs64, onDownload }) => {
+	({ title, body, image_bs64, onDownload, isLoading }) => {
 		const navigate = useNavigate()
 		const dispatch = useDispatch()
 
@@ -39,7 +40,11 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 				)
 			})
 		}
-		
+
+		if (isLoading) {
+			return <Preloader />
+		}
+
 		return (
 			<div className={style.filmContainer}>
 				<ContentContainer>

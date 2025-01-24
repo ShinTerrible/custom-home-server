@@ -1,11 +1,6 @@
-import { FilmListItemUI } from '../film-list-element'
+import { FilmListItemUI } from '../UI/film-list-element'
 import style from './styles.module.scss'
 import { useStore } from '@tanstack/react-store'
-import {
-	store,
-	updateFilmDetails,
-	updateSearchData,
-} from '../../services/store'
 import {
 	getFilmViewApi,
 	ISearchData,
@@ -18,15 +13,28 @@ import { FC, useState } from 'react'
 import { ContentContainer } from '../container/container'
 import { SortUI } from '../filter'
 import { PaginationUI } from '../pagination/paginationUI'
+import { useDispatch, useSelector } from '../../services/store'
+import {
+	getFilms,
+	getTotalPages,
+	getSearchID,
+	getSearchIdData,
+} from '../../slices/search-data/searchData'
+import {
+	getFilmView,
+	onDownloadData,
+	setFilmIdData,
+} from '../../slices/film-data/filmData'
+import { changeVisibility } from '../../slices/popup/popup'
 
 export const FilmListContainer: FC = () => {
-	const dataList: ISearchData = useStore(store, (state) => state.searchData[0])
-
-	let films: IFilmData[] = dataList.rows as IFilmData[]
-	let totalPages: number = dataList.total_pages as number
+	const dispatch = useDispatch()
+	let films: IFilmData[] | undefined = useSelector(getFilms)
+	let totalPages: number | undefined = useSelector(getTotalPages)
+	let searchID: string | undefined = useSelector(getSearchID)
 	const navigate = useNavigate()
 
-	const [page, setPage] = useState<number>(dataList?.page as number)
+	const [page, setPage] = useState<number>(totalPages as number)
 
 	const [displayPrev, setDisplayPrev] = useState(false)
 	const [displayNext, setDisplayNext] = useState(true)
@@ -35,43 +43,51 @@ export const FilmListContainer: FC = () => {
 	let statePage: number | string = page
 
 	const onUpdatePage = async (page: number) => {
-		let searchId: string | undefined = dataList?.search_id
 		setPage(page)
-		try {
-			let data = await getSearchIdDataApi(searchId as string, page)
-			return updateSearchData(data)
-		} catch (err) {
-			console.log(err)
-		} finally {
-			navigate(`/${id}`)
-		}
+		dispatch(getSearchIdData({ id: searchID as string, page: page }))
+
 		return
 	}
 
-	const onFilmDetails = async (id: string) => {
-		try {
-			let data = await getFilmViewApi(id)
-			let toUIData = { ...data, id }
-			return updateFilmDetails(toUIData)
-		} catch (err) {
-			console.log(err)
-		} finally {
-			navigate(`/${id}`)
-		}
-		return
+	// TODO: fix dispatch functions
+	// const onFilmDetails = async (id: string) => {
+	// 	try {
+	// 		let data = await getFilmViewApi(id)
+	// 		let toUIData = { ...data, id }
+	// 		return updateFilmDetails(toUIData)
+	// 	} catch (err) {
+	// 		console.log(err)
+	// 	} finally {
+	// 		navigate(`/${id}`)
+	// 	}
+	// 	return
+	// }
+		// const onDownload = async (id: string) => {
+	// 	await getDownloadApi(id)
+	// 	const showPopup = () =>
+	// 		store.setState((state) => {
+	// 			return { ...state, popupState: true }
+	// 		})
+
+	// 	const hidePopup = () =>
+	// 		store.setState((state) => {
+	// 			return { ...state, popupState: false }
+	// 		})
+
+	// 	showPopup()
+	// 	return setTimeout(hidePopup, 4000)
+	// }
+
+	const onFilmDetails = (id: string) => {
+		dispatch(getFilmView(id))
+		dispatch(setFilmIdData(id))
+		navigate(`/${id}`)
 	}
 
-	const onDownload = async (id: string) => {
-		await getDownloadApi(id)
-		const showPopup = () =>
-			store.setState((state) => {
-				return { ...state, popupState: true }
-			})
-
-		const hidePopup = () =>
-			store.setState((state) => {
-				return { ...state, popupState: false }
-			})
+	const onDownload = (id: string) => {
+		dispatch(onDownloadData(id))
+		const showPopup = () => dispatch(changeVisibility(true))
+		const hidePopup = () => dispatch(changeVisibility(false))
 
 		showPopup()
 		return setTimeout(hidePopup, 4000)
@@ -125,7 +141,7 @@ export const FilmListContainer: FC = () => {
 		<>
 			<SortUI />
 			<ContentContainer>
-				{dataList?.rows.length !== 0 ? filmListRender() : noData}
+				{films !== undefined ? filmListRender() : noData}
 			</ContentContainer>
 		</>
 	)

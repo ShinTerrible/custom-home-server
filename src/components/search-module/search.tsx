@@ -1,4 +1,4 @@
-import React, { FC, FormEvent, useEffect, useState } from 'react'
+import { FC, FormEvent, useState } from 'react'
 import { useDispatch } from '../../services/store'
 import { SearchModuleUI } from '../UI/search-module/searchUI'
 import { getSearchData } from '../../slices/search-data/searchData'

@@ -12,8 +12,8 @@ export const popupState = createSlice({
 	name: 'popupState',
 	initialState,
 	reducers: {
-		changeVisibility: (state) => {
-			state.popupVisible = !state.popupVisible
+		changeVisibility: (state, { payload }) => {
+			state.popupVisible = payload
 		},
 	},
 	selectors: {

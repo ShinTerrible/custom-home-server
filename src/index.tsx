@@ -1,18 +1,19 @@
-import { createRoot } from 'react-dom/client'
+import * as ReactDOMClient from 'react-dom/client'
 import { App } from './components/app/_app'
-import { QueryClientProvider } from '@tanstack/react-query'
-import { queryClient } from './utils/query-client'
 import { StrictMode } from 'react'
 import { BrowserRouter } from 'react-router-dom'
+import { store } from './services/store'
+import { Provider } from 'react-redux'
 
-const domNode = document.getElementById('root') as HTMLDivElement
-const root = createRoot(domNode)
+const container = document.getElementById('root') as HTMLElement
+const root = ReactDOMClient.createRoot(container!)
+
 root.render(
 	<StrictMode>
-		<QueryClientProvider client={queryClient}>
-			<BrowserRouter>
+		<BrowserRouter>
+			<Provider store={store}>
 				<App />
-			</BrowserRouter>
-		</QueryClientProvider>
+			</Provider>
+		</BrowserRouter>
 	</StrictMode>
 )

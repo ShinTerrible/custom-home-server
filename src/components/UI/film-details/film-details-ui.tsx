@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom'
 import { useDispatch } from '../../../services/store'
 import { resetFilmData } from '../../../slices/film-data/filmData'
 import { Preloader } from '../../preloader/preloader'
+import { Popup } from '../../popup/popup'
 
 type TFilmDataProps = {
 	title: string
@@ -28,7 +29,6 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 
 			return bodyData.map((data, index) => {
 				let [bold, thin] = data.split(':')
-				console.log(thin)
 				if (thin !== undefined && thin !== '') bold = bold + ':'
 				return (
 					<li className={style.listElement} key={index}>
@@ -42,7 +42,9 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 		}
 
 		if (isLoading) {
-			return <Preloader />
+			return (
+					<Preloader />
+			)
 		}
 
 		return (
@@ -66,7 +68,7 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 							</ButtonUI>
 							<ButtonUI
 								title={''}
-								onClick={() => onDownload}
+								onClick={onDownload}
 								styleProps={style.downloadButton}
 							>
 								<img
@@ -87,6 +89,7 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 						</div>
 						<ul className={style.listContainer}>{onConvertBody()}</ul>
 					</div>
+					<Popup />
 				</ContentContainer>
 			</div>
 		)

@@ -54,14 +54,18 @@ export const searchData = createSlice({
 				state.search_id = payload?.search_id
 				state.total_founded_rows = payload?.total_founded_rows
 				state.total_pages = payload?.total_pages
-				state.error = undefined
 			})
 			.addCase(getSearchData.rejected, (state, { error }) => {
 				state.error = error.message
 			}),
 			builder
 				.addCase(getSearchIdData.fulfilled, (state, { payload }) => {
-					state = { ...payload, error: undefined }
+					state.rows = payload.rows
+					state.page = payload.page
+					state.total_pages = payload.total_pages
+					state.total_founded_rows = payload.total_founded_rows
+					state.search_id = payload.search_id
+					state.error = undefined
 				})
 				.addCase(getSearchIdData.rejected, (state, { error }) => {
 					state.error = error.message
@@ -70,8 +74,8 @@ export const searchData = createSlice({
 	selectors: {
 		getSearchDataState: (state) => state,
 		getFilms: (state) => state.rows as [],
+		getPage: (state) => state.page,
 		getTotalPages: (state) => state.total_pages,
-		getTotalPagesRows: (state) => state.total_founded_rows,
 		getSearchID: (state) => state.search_id,
 	},
 })
@@ -79,8 +83,8 @@ export const searchData = createSlice({
 export const {
 	getSearchDataState,
 	getFilms,
+	getPage,
 	getTotalPages,
-	getTotalPagesRows,
 	getSearchID,
 } = searchData.selectors
 export const { updateSearchData, resetSearchData } = searchData.actions

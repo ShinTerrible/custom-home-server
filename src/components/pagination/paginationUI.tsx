@@ -3,37 +3,38 @@ import style from './styles.module.scss'
 import { ButtonUI } from '../button/button'
 
 type PaginationProps = {
-	statePage: number | string
-	displayPrev: boolean
-	displayNext: boolean
 	page: number
+	total: number
 	onUpdatePage: (page: number) => Promise<void>
 }
 
 export const PaginationUI: FC<PaginationProps> = ({
-	statePage,
-	displayPrev,
 	page,
-	displayNext,
+	total,
 	onUpdatePage,
 }) => {
+	let end = 'x_x'
+	let prev: number = page - 1
+	let next = page + 1
+
 	return (
 		<div className={style.paginationContainer}>
 			{' '}
 			<ButtonUI
-				id='prev_page-button'
-				title={`${statePage}`}
-				onClick={() => onUpdatePage((statePage as number) - 1)}
-				styleProps={''}
-				display={displayPrev}
+				title={`${prev <= 0 ? end : '← ' + prev}`}
+				// заглушка на запрос: если предыдущая стр равна 0, отправится текущая
+				onClick={() => onUpdatePage((page as number) - 1 !== 0 ? prev : page)}
+				styleProps={style.paginationButtonProps}
+				display={prev <= 0}
 			></ButtonUI>
 			<span className={style.paginationState}>{page}</span>
 			<ButtonUI
-				id='next_page-button'
-				title={`${typeof statePage === 'number' ? statePage + 1 : statePage}`}
-				onClick={() => onUpdatePage((statePage as number) + 1)}
-				styleProps={''}
-				display={displayNext}
+				title={`${next + 1 >= total ? end : next + ' →'}`}
+				onClick={() =>
+					onUpdatePage((page as number) + 1 <= total ? next : page)
+				}
+				styleProps={style.paginationButtonProps}
+				display={(page as number) + 1 >= total}
 			></ButtonUI>
 		</div>
 	)

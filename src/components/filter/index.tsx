@@ -6,6 +6,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from '../../services/store'
 import { IFilmData } from '../../utils/api'
 import { getFilms, updateSearchData } from '../../slices/search-data/searchData'
+import clsx from 'clsx'
 
 enum OrderBy {
 	sids = 'sids',
@@ -37,20 +38,23 @@ export const SortUI = () => {
 	const sortComponents = () => {
 		return (
 			<div className={style.dropdown}>
-				<ButtonUI
-					title={'по сидам'}
-					onClick={() => {
-						onSort(OrderBy.sids)
-					}}
-					styleProps={style.sideButton}
-				></ButtonUI>
-				<ButtonUI
-					title={'по размерам'}
-					onClick={() => {
-						onSort(OrderBy.size)
-					}}
-					styleProps={style.sizeButton}
-				></ButtonUI>
+				<div className={style.dropdownCover}>
+					{' '}
+					<ButtonUI
+						title={'по сидам'}
+						onClick={() => {
+							onSort(OrderBy.sids)
+						}}
+						styleProps={style.sideButton}
+					></ButtonUI>
+					<ButtonUI
+						title={'по размерам'}
+						onClick={() => {
+							onSort(OrderBy.size)
+						}}
+						styleProps={style.sizeButton}
+					></ButtonUI>
+				</div>
 			</div>
 		)
 	}

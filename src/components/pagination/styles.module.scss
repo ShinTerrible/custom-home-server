@@ -1,20 +1,23 @@
-.pagination-container {
+.pagination_container {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	flex-wrap: nowrap;
 }
 
-.pagination-state {
+.pagination_state {
 	display: block;
 	font-family: 'Open Sans', sans-serif;
-	color: rgb(255, 255, 255);
+	color: var(--grey-text);
 	font-size: 16px;
 }
 
-.pagination-button_props {
+.pagination {
 	box-sizing: border-box;
 	width: 60px;
+	color: var(--grey-text);
 	align-items: center;
 	text-align: center;
+	filter: drop-shadow(0 10px 8px var(--grey-border))
+		drop-shadow(0 4px 3px var(--grey-border));
 }

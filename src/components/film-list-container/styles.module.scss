@@ -1,9 +1,21 @@
-.no_data {
+.no-data {
 	font-family: 'Open Sans', sans-serif;
 	display: block;
 	margin: auto;
 	text-align: center;
 	font-size: 14px;
-	color: rgb(255, 255, 255);
+	color: var(--grey-text);
 }
 
+.size_m {
+	// width: 100%;
+	margin: auto;
+
+}
+
+.film_result-header {
+	color: var(--grey-text);
+	font-family: 'Open Sans', sans-serif;
+	display: block;
+	font-size: 16px;
+}

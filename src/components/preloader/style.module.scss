@@ -13,8 +13,8 @@
 	width: 74px;
 	height: 74px;
 	border: 1px solid;
-	border-color: rgb(255, 255, 255) rgb(175, 200, 226) rgb(83, 132, 182)
-		rgb(26, 109, 192);
+	border-color: var(--white-background) var(--grey-border) var(--hover-color)
+		var(--active-color);
 
 	border-radius: 50%;
 

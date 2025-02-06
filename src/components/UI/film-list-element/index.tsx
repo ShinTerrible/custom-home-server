@@ -30,45 +30,39 @@ export const FilmListItemUI = memo(
 				<div className={style.filmListItem}>
 					<div className={style.filmListPosition}>
 						<h3 id='label' className={style.label}>
-							<b>Название: </b> {label}
+							{label}
 						</h3>{' '}
 						<span id='sids' className={style.sids}>
-							<b>Сиды: </b>
-							{sids}
+							{sids}s
 						</span>
+						{/* TODO: вместо поинтеров вставить svg */}
+						<span className={style.pointers}>•</span>
 						<span id='size' className={style.size}>
-							<b>Размер:</b> {size}
+							{size}
 						</span>{' '}
+						<span className={style.pointers}>•</span>
 						<span id='forum' className={style.forum}>
-							<b>Форум:</b> {forum}
+							{forum}
 						</span>{' '}
-					</div>
-					<div className={style.buttonContainer}>
-						<ButtonUI
-							title={''}
-							onClick={() => onFilmDetails(id)}
-							styleProps={style.openButton}
-						>
-							<img
-								src={openSVG}
-								alt='изображение открытия файла'
-								className={style.icon}
-							/>
-						</ButtonUI>
+						<div className={style.buttonContainer}>
+							<ButtonUI
+								title={''}
+								onClick={() => onFilmDetails(id)}
+								styleProps={
+									!onclick ? style.openButton : style.downloadButtonClick
+								}
+								svgProps={`${style.filmElementIcon} ${style.iconOpen}`}
+							></ButtonUI>
 
-						<ButtonUI
-							title={''}
-							onClick={() => onDownload(id)}
-							styleProps={
-								!onclick ? style.downloadButton : style.downloadButtonClick
-							}
-						>
-							<img
-								src={downloadSVG}
-								alt='изображение загрузки файла'
-								className={style.icon}
-							/>
-						</ButtonUI>
+							<ButtonUI
+								title={''}
+								onClick={() => onDownload(id)}
+								styleProps={
+									!onclick ? style.downloadButton : style.downloadButtonClick
+								}
+								svgProps={`${style.filmElementIcon} ${style.iconDownload}`}
+							></ButtonUI>
+						</div>
 					</div>
 				</div>
 			</>

@@ -31,6 +31,7 @@ export const FilmListContainer: FC = () => {
 	let searchID: string | undefined = useSelector(getSearchID)
 	const navigate = useNavigate()
 
+	// TODO: сделать отдельный компонент noData
 	const noData = <span className={style.noData}>Пока ничего не найдено.</span>
 
 	const onUpdatePage = async (pageQuery: number) => {
@@ -54,6 +55,9 @@ export const FilmListContainer: FC = () => {
 	}
 
 	const filmListRender = () => {
+		const searchResultInfo = (
+			<span className={style.filmResultHeader}>Результаты поиска:</span>
+		)
 		const pagination = (
 			<PaginationUI
 				page={page as number}
@@ -77,13 +81,13 @@ export const FilmListContainer: FC = () => {
 			)
 		})
 
-		return [list, pagination]
+		return [searchResultInfo, list, pagination]
 	}
 
 	return (
 		<>
 			<SortUI />
-			<ContentContainer>
+			<ContentContainer styleProps={style.sizeM}>
 				{films !== undefined ? filmListRender() : noData}
 			</ContentContainer>
 		</>

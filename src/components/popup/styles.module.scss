@@ -7,11 +7,11 @@
 	flex-direction: row;
 	align-items: center;
 	width: 250px;
-	background-color: rgb(39, 128, 216);
+	background-color: var(--white-background);
 	border-radius: 0.5rem;
-	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
-		drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
-	box-shadow: 0px 2px 8px rgb(178, 199, 220);
+	filter: drop-shadow(0 10px 8px var(--grey-border))
+		drop-shadow(0 4px 3px var(--grey-border));
+	box-shadow: 0px 2px 8px var(--grey-border);
 	padding: 5px;
 	transition: display 0.7s ease-in-out 0.5s;
 }
@@ -23,13 +23,13 @@
 .popup-icon {
 	flex-grow: 1;
 	width: 16px;
-	filter: invert(1);
+	// filter: invert(1);
 }
 
 .popup-info {
 	flex-grow: 2;
 	display: block;
 	font-family: 'Open Sans', sans-serif;
-	color: rgb(255, 255, 255);
+	color: var(--grey-text);
 	font-size: 16px;
 }

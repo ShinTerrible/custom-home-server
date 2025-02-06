@@ -26,6 +26,7 @@ export const PaginationUI: FC<PaginationProps> = ({
 				onClick={() => onUpdatePage((page as number) - 1 !== 0 ? prev : page)}
 				styleProps={style.paginationButtonProps}
 				display={prev <= 0}
+				svgProps={style.filmElementIcon}
 			></ButtonUI>
 			<span className={style.paginationState}>{page}</span>
 			<ButtonUI
@@ -35,6 +36,7 @@ export const PaginationUI: FC<PaginationProps> = ({
 				}
 				styleProps={style.paginationButtonProps}
 				display={(page as number) + 1 >= total}
+				svgProps={style.filmElementIcon}
 			></ButtonUI>
 		</div>
 	)

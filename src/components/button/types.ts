@@ -7,4 +7,5 @@ export interface IButtonProps {
 	styleProps: string
 	display?: boolean
 	children?: React.ReactNode
+	svgProps?: string
 }

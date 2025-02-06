@@ -9,6 +9,7 @@ export const ButtonUI = ({
 	styleProps,
 	display,
 	children,
+	svgProps,
 }: IButtonProps) => {
 	return (
 		<>
@@ -18,8 +19,7 @@ export const ButtonUI = ({
 				className={clsx(style.buttonContent, styleProps)}
 				disabled={display}
 			>
-				<span>{children}</span>
-				{title}
+				{title} <span className={clsx(svgProps)}></span>
 			</button>
 		</>
 	)

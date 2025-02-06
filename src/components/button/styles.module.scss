@@ -1,7 +1,6 @@
 .button_content {
 	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
-	color: rgb(75, 74, 74);
 	padding-block-start: 8px;
 	padding-block-end: 8px;
 	padding-inline-start: 1rem;
@@ -12,8 +11,12 @@
 	border-radius: 0.5em;
 	min-height: 34px;
 	min-width: 41.8px;
+	// background-color: var(--white-background);
 }
 
 .button_content:hover {
-	border: 1px solid rgb(103, 146, 221);
+	background-color: var(--hover-color);
+}
+.button_content:active {
+	background-color: var(--active-color);
 }

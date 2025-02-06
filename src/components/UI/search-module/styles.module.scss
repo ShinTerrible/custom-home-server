@@ -1,13 +1,18 @@
+.filter_container {
+	width: 100%;
+	box-sizing: border-box;
+}
+
 .form {
 	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
+	justify-content: space-between;
 	gap: 5px;
-	margin: auto;
-	filter: drop-shadow(0 10px 8px rgb(0 0 0 / 0.04))
-		drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));
+	// margin: auto;
+	filter: drop-shadow(0 10px 8px var(--grey-border))
+		drop-shadow(0 4px 3px var(--grey-border));
 }
 
 .search_name {
@@ -19,14 +24,17 @@
 	border: 0.5px solid transparent;
 	font-size: 14px;
 	color: rgb(75, 74, 74);
+	flex-grow: 2;
+}
+
+.search_name:focus-visible {
+	outline: none;
 }
 
 .search-button {
-	background-color: rgb(255, 255, 255);
+	background-color: var(--white-background);
 }
 
 .search-button:active {
-	background-color: rgba(207, 211, 215, 0.28);
-	color: white;
-	border: 0.5px solid white;
+	background-color: var(--active-color);
 }

@@ -42,9 +42,7 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 		}
 
 		if (isLoading) {
-			return (
-					<Preloader />
-			)
+			return <Preloader />
 		}
 
 		return (
@@ -59,34 +57,28 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 									navigate('/')
 								}}
 								styleProps={style.backButton}
-							>
-								<img
-									src={backSVG}
-									alt='изображение стрелки назад'
-									className={style.icon}
-								/>
-							</ButtonUI>
-							<ButtonUI
-								title={''}
-								onClick={onDownload}
-								styleProps={style.downloadButton}
-							>
-								<img
-									src={downloadSVG}
-									alt='изображение скачать'
-									className={style.icon}
-								/>
-							</ButtonUI>
+								svgProps={`${style.icon} ${style.iconBack}`}
+							></ButtonUI>
 						</div>
 
 						<div className={style.imageContainer}>
-							<h3 className={style.title}>{title}</h3>
 							<img
 								className={style.image}
 								alt={`Постер ${title}`}
 								src={'data:image/jpeg;base64, ' + image_bs64}
 							/>
+							<h3 className={style.title}>{title}</h3>
 						</div>
+						<div>
+							{' '}
+							<ButtonUI
+								title={'Скачать'}
+								onClick={onDownload}
+								styleProps={style.downloadButton}
+								svgProps={`${style.icon} ${style.iconDownload}`}
+							></ButtonUI>
+						</div>
+
 						<ul className={style.listContainer}>{onConvertBody()}</ul>
 					</div>
 					<Popup />

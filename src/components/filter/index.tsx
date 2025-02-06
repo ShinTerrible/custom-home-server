@@ -6,7 +6,6 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from '../../services/store'
 import { IFilmData } from '../../utils/api'
 import { getFilms, updateSearchData } from '../../slices/search-data/searchData'
-import clsx from 'clsx'
 
 enum OrderBy {
 	sids = 'sids',
@@ -35,6 +34,7 @@ export const SortUI = () => {
 		return
 	}
 
+	// TODO: вынести в компонент
 	const sortComponents = () => {
 		return (
 			<div className={style.dropdown}>
@@ -60,20 +60,15 @@ export const SortUI = () => {
 	}
 
 	return (
-		<ContentContainer styleProps={style.container}>
+		<ContentContainer styleProps={style.sortContainer}>
 			<ButtonUI
 				title={''}
 				onClick={() => {
 					setVisibility((state) => !state)
 				}}
 				styleProps={style.sortButton}
-			>
-				<img
-					src={filterSVG}
-					alt='изображение сортировки'
-					className={style.icon}
-				/>
-			</ButtonUI>
+				svgProps={style.sortIcon}
+			></ButtonUI>
 			{isShown ? sortComponents() : null}
 		</ContentContainer>
 	)

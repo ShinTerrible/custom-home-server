@@ -13,7 +13,7 @@ export const SearchModuleUI: FC<SearchModuleUIProps> = ({
 	setValue,
 }) => {
 	return (
-		<ContentContainer>
+		<ContentContainer styleProps={style.filterContainer}>
 			<form className={style.form} onSubmit={onSubmit}>
 				{' '}
 				<input
@@ -24,9 +24,8 @@ export const SearchModuleUI: FC<SearchModuleUIProps> = ({
 					name='input'
 					onChange={(e) => setValue(e.target.value)}
 				/>
-				<label htmlFor='input' className={style.searchImg}>
+				<label htmlFor='input' className={style.searchImg}></label>
 					<ButtonUI title='Искать' styleProps={style.searchButton} />
-				</label>
 			</form>
 		</ContentContainer>
 	)

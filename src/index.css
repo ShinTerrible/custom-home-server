@@ -5,10 +5,41 @@
 	--hover-color: rgb(245, 212, 212);
 	--active-color: rgb(226, 177, 177);
 	--acsent-color: rgb(247, 227, 128);
-	--icon-back: url("data:image/svg+xml,%3Csvg id='Слой_1' data-name='Слой 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cpath d='M8.58,5.19,2.13,11.64a1.52,1.52,0,0,0,0,2.19l6.42,6.4a1.52,1.52,0,0,0,2.6-1.05V17.31h11a2.21,2.21,0,0,0,2.22-2.22V10.36a2.21,2.21,0,0,0-2.22-2.22h-11V6.32A1.52,1.52,0,0,0,8.58,5.19Z'/%3E%3C/svg%3E");
 	--icon-download: url("data:image/svg+xml,%3Csvg id='Слой_1' data-name='Слой 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:none;stroke:%23000;stroke-linecap:round;stroke-miterlimit:10;stroke-width:2px;%7D%3C/style%3E%3C/defs%3E%3Cpath d='M19.84,11.39H17.12a.5.5,0,0,0,0-.12V4.84A2.54,2.54,0,0,0,14.6,2.31H11.35A2.54,2.54,0,0,0,8.81,4.84v6.43a.5.5,0,0,0,0,.12H6.16a.57.57,0,0,0-.41,1l6.84,7a.57.57,0,0,0,.82,0l6.84-7A.57.57,0,0,0,19.84,11.39Z'/%3E%3Cpath class='cls-1' d='M2.93,18v2.6A2.37,2.37,0,0,0,5.3,23H20.7a2.37,2.37,0,0,0,2.37-2.36V18'/%3E%3C/svg%3E");
-	--icon-open: url("data:image/svg+xml,%3Csvg id='Слой_1' data-name='Слой 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:none;stroke:%23000;stroke-linecap:round;stroke-linejoin:round;stroke-width:2px;%7D%3C/style%3E%3C/defs%3E%3Cpath class='cls-1' d='M10.5,2.31H5.39A2.46,2.46,0,0,0,2.93,4.77V20.6A2.37,2.37,0,0,0,5.27,23H20.7a2.37,2.37,0,0,0,2.37-2.36V14.8'/%3E%3Cpath d='M24.07,9.49v-7A1.17,1.17,0,0,0,22.9,1.27h-7a1.17,1.17,0,0,0-.84,2l1,1-6,6a1.71,1.71,0,0,0,0,2.42l2.57,2.57a1.71,1.71,0,0,0,2.41,0l6-6,1,1A1.16,1.16,0,0,0,24.07,9.49Z'/%3E%3C/svg%3E");
-	--icon-filter: url("data:image/svg+xml,%3Csvg id='Слой_1' data-name='Слой 1' xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'%3E%3Cdefs%3E%3Cstyle%3E.cls-1%7Bfill:none;stroke:black;stroke-linecap:round;stroke-miterlimit:10;stroke-width:3px;%7D%3C/style%3E%3C/defs%3E%3Cpath d='M1.45,12.55l3.81,3.81a.89.89,0,0,0,1.28,0l3.78-3.78a.9.9,0,0,0-.63-1.53H8.6V4.57A1.31,1.31,0,0,0,7.29,3.26H4.5A1.31,1.31,0,0,0,3.19,4.57v6.48H2.12A.9.9,0,0,0,1.45,12.55Z'/%3E%3Cline class='cls-1' x1='15.14' y1='4.77' x2='23.61' y2='4.77'/%3E%3Cline class='cls-1' x1='15.14' y1='10.34' x2='23.61' y2='10.34'/%3E%3Cline class='cls-1' x1='12.35' y1='15.92' x2='23.61' y2='15.92'/%3E%3Cline class='cls-1' x1='2.7' y1='21.49' x2='23.61' y2='21.49'/%3E%3C/svg%3E");
+	--font-main: 'Comfortaa';
+	--font-primary: 'Gryppo';
+	--font-weight-regular: 400;
+	--font-weight-bold: 700;
+}
+
+@font-face {
+	font-family: var(--font-main);
+	font-style: normal;
+	font-weight: var(--font-weight-regular);
+	font-display: swap;
+	src:
+		local('Comfortaa'),
+		url('./assets/fonts/Comfortaa-Regular.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: var(--font-main);
+	font-style: normal;
+	font-weight: var(--font-weight-bold);
+	font-display: swap;
+	src:
+		local('Comfortaa Bold'),
+		url('./assets/fonts/Comfortaa-Bold.ttf') format('ttf');
+}
+
+@font-face {
+	font-family: var(--font-primary);
+	font-style: normal;
+	font-weight: var(--font-weight-regular);
+	font-display: swap;
+	src:
+		local('Gryppo'),
+		url('./assets/fonts/Gruppo-Regular.ttf') format('ttf');
 }
 
 body {
@@ -17,6 +48,7 @@ body {
 	max-width: 620px;
 	margin: auto;
 	box-sizing: border-box;
+	font-family: var(--font-main);
 }
 
 .app {

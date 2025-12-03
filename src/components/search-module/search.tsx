@@ -1,5 +1,5 @@
 import { FC, FormEvent, useState } from 'react'
-import { useDispatch } from '../../services/store'
+import { useDispatch, useSelector } from '../../services/store'
 import { SearchModuleUI } from '../UI/search-module/searchUI'
 import { getSearchData } from '../../slices/search-data/searchData'
 
@@ -10,6 +10,7 @@ export const SearchModule: FC = () => {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		dispatch(getSearchData(inputValue))
+
 	}
 
 	return <SearchModuleUI onSubmit={handleSubmit} setValue={setInputValue} />

@@ -3,13 +3,12 @@ import { IButtonProps } from './types'
 import style from './styles.module.scss'
 
 export const ButtonUI = ({
-	id,
 	title,
 	onClick,
 	styleProps,
-	display,
-	children,
+	disabled,
 	svgProps,
+	...otherProps
 }: IButtonProps) => {
 	return (
 		<>
@@ -17,7 +16,8 @@ export const ButtonUI = ({
 				type='submit'
 				onClick={onClick}
 				className={clsx(style.buttonContent, styleProps)}
-				disabled={display}
+				disabled={disabled}
+				{...otherProps}
 			>
 				{title} <span className={clsx(svgProps)}></span>
 			</button>

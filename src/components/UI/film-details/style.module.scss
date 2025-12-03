@@ -1,25 +1,26 @@
+@mixin box-shadow() {
+	box-shadow:
+		0 4px 20px hsl(205deg 50% 30% / 0.15),
+		0 4px 10px hsl(205deg 30% 10% / 0.075);
+}
+
 .film-container {
 	width: 100%;
 	display: flex;
 	align-items: center;
 	flex-direction: column;
-	// margin: auto;
-	// padding: 20px;
 }
 
 .cover {
 	display: flex;
 	flex-direction: column;
-	// padding: 1rem;
 	background-color: transparent;
 	border: 0.5px solid transparent;
 	border-radius: 0.5rem;
-	font-family: 'Open Sans', sans-serif;
 	position: relative;
 }
 
 .list_container {
-	font-family: inherit;
 	list-style-type: none;
 	padding-inline-start: 0px;
 	display: flex;
@@ -35,7 +36,6 @@
 }
 
 .title {
-	font-family: inherit;
 	font-weight: 600;
 	font-size: 18px;
 	line-height: 18px;
@@ -49,13 +49,10 @@
 
 .list_element {
 	width: 100%;
-	font-family: inherit;
 	margin: 0;
-	font-family: inherit;
 }
 
 .bold {
-	font-family: inherit;
 	font-weight: 600;
 }
 
@@ -78,7 +75,6 @@
 .download-button {
 	width: 30%;
 	font-weight: 400;
-	font-family: 'Open Sans', sans-serif;
 	font-size: 18px;
 	color: var(--text-grey);
 	cursor: pointer;
@@ -88,14 +84,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	padding-block-end: 10px;
+	padding-block-start: 10px;
 }
 
 .download-button {
 	width: 100%;
 	display: flex;
 	flex-direction: row;
-	// margin-block-start: 15px;
-	background-color: var(--acsent-color);
+	background: linear-gradient(0deg, var(--acsent-color), rgb(252, 245, 206));
 }
 
 .icon {
@@ -105,10 +102,40 @@
 	margin-inline-start: 5px;
 }
 
-.icon-back {
-	background-image: var(--icon-back);
-}
-
 .icon-download {
 	background-image: var(--icon-download);
+}
+
+.icon-back {
+	position: relative;
+	background-image: url('../../../assets/images/left_4536435.png');
+	background-repeat: no-repeat;
+	background-size: contain;
+	background-position: center;
+	width: 35px;
+	height: 35px;
+	display: inline-block;
+	border-radius: 0.6rem;
+	transform: translate3d(0, 0, 0.01px);
+	opacity: 0.999;
+	backdrop-filter: blur(9px) brightness(1.1);
+	@include box-shadow();
+	margin-inline-start: 0;
+	margin-block-end: 10px;
+	filter: hue-rotate(190deg);
+}
+
+.icon-back:hover {
+	cursor: pointer;
+	filter: hue-rotate(190deg) brightness(0.9);
+}
+
+.icon-back:active {
+	filter: hue-rotate(190deg) contrast(200%);
+}
+
+@media screen and (max-width: 540px) {
+	.back-button {
+		display: none;
+	}
 }

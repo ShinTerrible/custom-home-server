@@ -3,13 +3,10 @@ import { FilmDetailsUI } from '../UI/film-details/film-details-ui'
 import { useSelector } from '../../services/store'
 import { onDownloadData } from '../../slices/film-data/filmData'
 import { useDispatch } from '../../services/store'
-import { useParams } from 'react-router-dom'
+import { Params, useParams } from 'react-router-dom'
 
 import { changeVisibility } from '../../slices/popup/popup'
 
-type Params = {
-	_id: string | undefined
-}
 
 export const FilmDetails: FC = () => {
 	/* Готовим данные для отображения */

@@ -1,11 +1,8 @@
 import clsx from 'clsx'
 import style from './styles.module.scss'
 import { FC } from 'react'
+import { ContentElement } from './types'
 
-type ContentElement = {
-	children: any
-	styleProps?: string
-}
 
 export const ContentContainer: FC<ContentElement> = ({
 	children,

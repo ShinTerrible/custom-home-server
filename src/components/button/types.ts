@@ -1,11 +1,10 @@
-import React from 'react'
+import React, { SyntheticEvent } from 'react'
 
 export interface IButtonProps {
-	id?: string
 	title: String
-	onClick?: () => void
+	onClick?: (e: SyntheticEvent) => void
 	styleProps: string
-	display?: boolean
+	disabled?: boolean
 	children?: React.ReactNode
 	svgProps?: string
 }

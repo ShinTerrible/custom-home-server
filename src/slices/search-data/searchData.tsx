@@ -17,6 +17,7 @@ interface SerializedError {
 type Error = {
 	error: SerializedError | undefined | string
 }
+
 export const initialState: ISearchData & Error = {
 	rows: undefined,
 	page: 0,
@@ -47,7 +48,7 @@ export const searchData = createSlice({
 		resetSearchData: () => initialState,
 	},
 	extraReducers: (builder) => {
-		builder
+		;(builder
 			.addCase(getSearchData.fulfilled, (state, { payload }) => {
 				state.rows = payload?.rows
 				state.page = payload?.page
@@ -69,7 +70,7 @@ export const searchData = createSlice({
 				})
 				.addCase(getSearchIdData.rejected, (state, { error }) => {
 					state.error = error.message
-				})
+				}))
 	},
 	selectors: {
 		getSearchDataState: (state) => state,
@@ -77,6 +78,7 @@ export const searchData = createSlice({
 		getPage: (state) => state.page,
 		getTotalPages: (state) => state.total_pages,
 		getSearchID: (state) => state.search_id,
+		getError: (state) => state.error,
 	},
 })
 

@@ -1,18 +1,18 @@
 import { ButtonUI } from '../button/button'
-import filterSVG from '../../assets/images/sort-01.svg'
-import style from './styles.module.scss'
 import { ContentContainer } from '../container/container'
 import { useState } from 'react'
 import { useDispatch, useSelector } from '../../services/store'
 import { IFilmData } from '../../utils/api'
 import { getFilms, updateSearchData } from '../../slices/search-data/searchData'
+import { SortUI } from '../UI/sort/sort'
+import style from './styles.module.scss'
 
 enum OrderBy {
 	sids = 'sids',
 	size = 'size_bytes',
 }
 
-export const SortUI = () => {
+export const Sort = () => {
 	const dispatch = useDispatch()
 	const [isShown, setVisibility] = useState<boolean>(false)
 	let arr = useSelector(getFilms)
@@ -34,31 +34,6 @@ export const SortUI = () => {
 		return
 	}
 
-	// TODO: вынести в компонент
-	const sortComponents = () => {
-		return (
-			<div className={style.dropdown}>
-				<div className={style.dropdownCover}>
-					{' '}
-					<ButtonUI
-						title={'по сидам'}
-						onClick={() => {
-							onSort(OrderBy.sids)
-						}}
-						styleProps={style.sideButton}
-					></ButtonUI>
-					<ButtonUI
-						title={'по размерам'}
-						onClick={() => {
-							onSort(OrderBy.size)
-						}}
-						styleProps={style.sizeButton}
-					></ButtonUI>
-				</div>
-			</div>
-		)
-	}
-
 	return (
 		<ContentContainer styleProps={style.sortContainer}>
 			<ButtonUI
@@ -69,7 +44,7 @@ export const SortUI = () => {
 				styleProps={style.sortButton}
 				svgProps={style.sortIcon}
 			></ButtonUI>
-			{isShown ? sortComponents() : null}
+			{isShown ? <SortUI onSort={onSort} /> : null}
 		</ContentContainer>
 	)
 }

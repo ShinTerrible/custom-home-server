@@ -2,9 +2,9 @@ import { FilmListItemUI } from '../UI/film-list-element'
 import style from './styles.module.scss'
 import { IFilmData } from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
-import { FC } from 'react'
+import { FC, SyntheticEvent } from 'react'
 import { ContentContainer } from '../container/container'
-import { SortUI } from '../filter'
+import { Sort } from '../sort'
 import { PaginationUI } from '../pagination/paginationUI'
 import { useDispatch, useSelector } from '../../services/store'
 import {
@@ -19,6 +19,7 @@ import {
 	onDownloadData,
 	setFilmIdData,
 } from '../../slices/film-data/filmData'
+
 import { changeVisibility } from '../../slices/popup/popup'
 
 export const FilmListContainer: FC = () => {
@@ -31,7 +32,6 @@ export const FilmListContainer: FC = () => {
 	let searchID: string | undefined = useSelector(getSearchID)
 	const navigate = useNavigate()
 
-	// TODO: сделать отдельный компонент noData
 	const noData = <span className={style.noData}>Пока ничего не найдено.</span>
 
 	const onUpdatePage = async (pageQuery: number) => {
@@ -39,14 +39,16 @@ export const FilmListContainer: FC = () => {
 		return
 	}
 
-	const onFilmDetails = (id: string) => {
+	const onFilmDetails = (e: SyntheticEvent, id: string) => {
 		dispatch(getFilmView(id))
 		dispatch(setFilmIdData(id))
 		navigate(`/${id}`)
 	}
 
-	const onDownload = (id: string) => {
+	const onDownload = ( e: SyntheticEvent, id: string) => {
 		dispatch(onDownloadData(id))
+		e.preventDefault()
+		e.stopPropagation()
 		const showPopup = () => dispatch(changeVisibility(true))
 		const hidePopup = () => dispatch(changeVisibility(false))
 
@@ -56,8 +58,13 @@ export const FilmListContainer: FC = () => {
 
 	const filmListRender = () => {
 		const searchResultInfo = (
-			<span className={style.filmResultHeader}>Результаты поиска:</span>
+			<div className={style.filmResultContainer}>
+					<span className={style.filmResultHeader}>Результаты поиска:</span>
+					<Sort/>
+			</div>
+		
 		)
+
 		const pagination = (
 			<PaginationUI
 				page={page as number}
@@ -81,12 +88,12 @@ export const FilmListContainer: FC = () => {
 			)
 		})
 
+
 		return [searchResultInfo, list, pagination]
 	}
 
 	return (
 		<>
-			<SortUI />
 			<ContentContainer styleProps={style.sizeM}>
 				{films !== undefined ? filmListRender() : noData}
 			</ContentContainer>

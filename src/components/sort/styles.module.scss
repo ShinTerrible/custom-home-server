@@ -1,0 +1,58 @@
+@mixin box-shadow() {
+	box-shadow:
+		0 4px 20px hsl(205deg 50% 30% / 0.15),
+		0 4px 10px hsl(205deg 30% 10% / 0.075);
+}
+
+.sort_container {
+	width: 50%;
+	border: 0px solid transparent;
+	box-sizing: border-box;
+	display: flex;
+	flex-direction: row-reverse;
+	justify-content: end;
+	margin: 0px;
+	padding: 0px;
+}
+
+.sort-button {
+	cursor: pointer;
+	background-image: url('../../assets/images/up-arrows_4536533.png');
+	background-repeat: no-repeat;
+	background-size: cover;
+	background-position: center;
+	padding: 0;
+	margin: 0;
+	display: flex;
+	align-items: center;
+	justify-content: end;
+	border: 0px solid transparent;
+	@include box-shadow();
+}
+
+.sort_icon {
+	position: relative;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
+	border-radius: 0.3rem;
+}
+
+.sort-button:hover {
+	background-color: transparent;
+}
+
+.sort_icon:hover {
+	cursor: pointer;
+	filter: brightness(0.9);
+}
+
+.sort_icon:active {
+	filter: contrast(200%);
+}
+
+@media screen and (max-width: 540px) {
+	.sort_container {
+		width: 59%;
+	}
+}

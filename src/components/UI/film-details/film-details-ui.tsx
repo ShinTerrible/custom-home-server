@@ -3,13 +3,12 @@ import { FC } from 'react'
 import style from './style.module.scss'
 import { ContentContainer } from '../../container/container'
 import { ButtonUI } from '../../button/button'
-import backSVG from '../../../assets/images/back-01.svg'
-import downloadSVG from '../../../assets/images/dwnld1.svg'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from '../../../services/store'
 import { resetFilmData } from '../../../slices/film-data/filmData'
 import { Preloader } from '../../preloader/preloader'
 import { Popup } from '../../popup/popup'
+import imgNull from '../../../assets/images/aac495934ca85855fed25a60e8bb2d98.jpg'
 
 type TFilmDataProps = {
 	title: string
@@ -64,15 +63,19 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 						<div className={style.imageContainer}>
 							<img
 								className={style.image}
-								alt={`Постер ${title}`}
-								src={'data:image/jpeg;base64, ' + image_bs64}
+								alt={`Poster ${title}`}
+								src={
+									image_bs64 === null
+										? imgNull
+										: 'data:image/jpeg;base64, ' + image_bs64
+								}
 							/>
+
 							<h3 className={style.title}>{title}</h3>
 						</div>
 						<div>
-							{' '}
 							<ButtonUI
-								title={'Скачать'}
+								title={'Download'}
 								onClick={onDownload}
 								styleProps={style.downloadButton}
 								svgProps={`${style.icon} ${style.iconDownload}`}

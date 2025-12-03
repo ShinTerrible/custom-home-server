@@ -1,5 +1,4 @@
 .no-data {
-	font-family: 'Open Sans', sans-serif;
 	display: block;
 	margin: auto;
 	text-align: center;
@@ -8,14 +7,24 @@
 }
 
 .size_m {
-	// width: 100%;
 	margin: auto;
+}
 
+.film-result-container {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
 .film_result-header {
 	color: var(--grey-text);
-	font-family: 'Open Sans', sans-serif;
 	display: block;
 	font-size: 16px;
+	width: 50%;
+}
+
+@media screen and (max-width: 540px) {
+	.film_result-header {
+		font-size: 14px;
+	}
 }

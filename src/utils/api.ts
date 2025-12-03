@@ -73,7 +73,6 @@ export const getFilmViewApi = (id: string) => {
 		.then((res) => checkResponse<IFilmView>(res))
 		.then((data) => {
 			if (data) return data
-
 			return Promise.reject(data)
 		})
 }

@@ -59,7 +59,7 @@ module.exports = {
 				exclude: /node_modules/,
 			},
 			{
-				test: /\.(png|jpg|gif|webp)$/,
+				test: /\.(png|jpg|gif|webp|jpeg|gif|ico|svg)$/,
 				type: 'asset/resource',
 				generator: {
 					filename: 'static/images/[hash][ext][query]',
@@ -88,6 +88,7 @@ module.exports = {
 	plugins: [
 		new HTMLWebpackPlugins({
 			template: path.resolve(__dirname, '..', './public/index.html'), //путь до папки public изменился
+			favicon: path.resolve(__dirname, '..', './public/favicon.ico'),
 		}),
 		new CleanWebpackPlugin(),
 		new MiniCssExtractPlugin({

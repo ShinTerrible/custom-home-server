@@ -23,6 +23,7 @@ export type ISearchData = {
 	total_pages: number | undefined
 	total_founded_rows: number | undefined
 	search_id: string | undefined
+	isLoading: boolean
 }
 
 export type IFilmView = {

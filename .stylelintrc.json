@@ -1,9 +1,9 @@
 {
-	"extends": ["stylelint-config-standard"],
+	"extends": ["stylelint-config-standard", "stylelint-config-standard-scss"],
 	"plugins": ["stylelint-order"],
 	"rules": {
 		"color-no-invalid-hex": true,
-		"font-family: -no-duplicate-names": true,
+		"font-family-no-duplicate-names": true,
 		"function-calc-no-unspaced-operator": true,
 		"function-linear-gradient-no-nonstandard-direction": true,
 		"string-no-newline": true,
@@ -20,7 +20,28 @@
 		"selector-pseudo-element-no-unknown": true,
 		"selector-type-no-unknown": true,
 		"media-feature-name-no-unknown": true,
-		"at-rule-no-unknown": true,
+		"at-rule-no-unknown": [
+			true,
+			{
+				"ignoreAtRules": [
+					"mixin",
+					"include",
+					"extend",
+					"use",
+					"forward",
+					"if",
+					"else",
+					"for",
+					"each",
+					"while",
+					"function",
+					"return",
+					"debug",
+					"warn",
+					"error"
+				]
+			}
+		],
 		"comment-no-empty": true,
 		"no-empty-source": true,
 		"no-invalid-double-slash-comments": true,
@@ -30,7 +51,7 @@
 		"declaration-block-single-line-max-declarations": 1,
 		"comment-word-disallowed-list": ["todo"],
 		"color-hex-length": "long",
-		"font-family: -name-quotes": "always-unless-keyword",
+		"font-family-name-quotes": "always-unless-keyword",
 		"function-name-case": "lower",
 		"function-url-quotes": "always",
 		"length-zero-no-unit": true,
@@ -41,9 +62,6 @@
 			}
 		],
 		"declaration-empty-line-before": "never",
-		"declaration-property-unit-allowed-list": {
-			"line-height": []
-		},
 		"selector-class-pattern": "^[a-z][a-zA-Z0-9]*(-[a-zA-Z0-9]+)*(__[a-z0-9]+(-[a-z0-9]+)*)?(_[a-z0-9]+(-[a-z0-9]+)*)?(_[a-z0-9]+(-[a-z0-9]+)*)?$",
 		"selector-attribute-quotes": "always",
 		"selector-pseudo-element-colon-notation": "double",
@@ -157,7 +175,7 @@
 			"font",
 			"font-weight",
 			"font-size",
-			"font-family: ",
+			"font-family",
 			"font-style",
 			"font-display",
 			"font-variant",

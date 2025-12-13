@@ -1,12 +1,12 @@
 .transparent_background {
-	background-color: var(--grey-border);
-	min-height: 30px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 10px;
-	margin: auto;
 	gap: 15px;
-	border-radius: 0.5em;
+	min-height: 30px;
+	margin: auto;
+	padding: 10px;
+	background-color: var(--grey-border);
 	border: 0.5px solid transparent;
+	border-radius: 0.5em;
 }

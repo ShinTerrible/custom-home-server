@@ -50,7 +50,7 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 					<div className={style.cover}>
 						<div className={style.buttonContainer}>
 							<ButtonUI
-								title={''}
+								title={'Назад'}
 								onClick={() => {
 									dispatch(resetFilmData())
 									navigate('/')
@@ -75,7 +75,7 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 						</div>
 						<div>
 							<ButtonUI
-								title={'Download'}
+								title={'Скачать'}
 								onClick={onDownload}
 								styleProps={style.downloadButton}
 								svgProps={`${style.icon} ${style.iconDownload}`}

@@ -6,11 +6,13 @@ import { ButtonUI } from '../../button/button'
 type SearchModuleUIProps = {
 	onSubmit: (e: FormEvent<HTMLFormElement>) => void
 	setValue: Dispatch<SetStateAction<string>>
+	onKeyDown: (e: KeyboardEvent) => void
 }
 
 export const SearchModuleUI: FC<SearchModuleUIProps> = ({
 	onSubmit,
 	setValue,
+	onKeyDown
 }) => {
 	return (
 		<ContentContainer styleProps={style.filterContainer}>
@@ -22,6 +24,7 @@ export const SearchModuleUI: FC<SearchModuleUIProps> = ({
 					placeholder='Поиск...'
 					name='input'
 					onChange={(e) => setValue(e.target.value)}
+					onKeyDown={e => onKeyDown} 
 				/>
 				<label htmlFor='input' className={style.searchImg}></label>
 					<ButtonUI title='Искать' styleProps={style.searchButton}> </ButtonUI>

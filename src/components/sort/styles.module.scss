@@ -1,41 +1,57 @@
 @mixin box-shadow() {
 	box-shadow:
-		0 4px 20px hsl(205deg 50% 30% / 0.15),
-		0 4px 10px hsl(205deg 30% 10% / 0.075);
+		0 4px 20px hsl(205deg 50% 30% / 15%),
+		0 4px 10px hsl(205deg 30% 10% / 7.5%);
 }
 
 .sort_container {
-	width: 50%;
-	border: 0px solid transparent;
-	box-sizing: border-box;
 	display: flex;
 	flex-direction: row-reverse;
 	justify-content: end;
-	margin: 0px;
-	padding: 0px;
+	box-sizing: border-box;
+	width: 50%;
+	margin: 0;
+	padding: 0;
+	border: 0 solid transparent;
 }
 
 .sort-button {
-	cursor: pointer;
-	background-image: url('../../assets/images/up-arrows_4536533.png');
-	background-repeat: no-repeat;
-	background-size: cover;
-	background-position: center;
-	padding: 0;
+	display: flex;
+	justify-content: end;
+	align-items: center;
 	margin: 0;
+	padding: 0;
+	// background-image: url('../../assets/images/free-icon-ascending-sort-7183242.png');
+	// background-repeat: no-repeat;
+	// background-position: center;
+	// background-size: cover;
+	// border: 0 solid transparent;
+	cursor: pointer;
+
+	// @include box-shadow;
+
+	border: 0 solid transparent;
+	padding: 7px;
+	font-size: 12px;
 	display: flex;
 	align-items: center;
-	justify-content: end;
-	border: 0px solid transparent;
-	@include box-shadow();
+	gap: 5px;
+	box-sizing: border-box;
+	border: none;
+	background: linear-gradient(0deg, rgb(243, 94, 218), rgb(248, 199, 240));
+	backdrop-filter: blur(8px) url(#switcher) saturate(var(150%));
+	-webkit-backdrop-filter: blur(8px) saturate(var(150%));
 }
 
 .sort_icon {
 	position: relative;
-	width: 30px;
-	height: 30px;
-	display: inline-block;
-	border-radius: 0.3rem;
+	width: 15px;
+	height: 15px;
+	background-image: url('../../assets/images/free-icon-ascending-sort-7183242.png');
+	background-repeat: no-repeat;
+	background-position: right;
+	background-size: contain;
+	margin-inline-start: 3px;
 }
 
 .sort-button:hover {
@@ -51,7 +67,7 @@
 	filter: contrast(200%);
 }
 
-@media screen and (max-width: 540px) {
+@media screen and (width <= 540px) {
 	.sort_container {
 		width: 59%;
 	}

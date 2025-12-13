@@ -9,7 +9,6 @@ import { changeVisibility } from '../../slices/popup/popup'
 
 
 export const FilmDetails: FC = () => {
-	/* Готовим данные для отображения */
 	const { _id } = useParams<Params>()
 
 	const films = useSelector((state) => state.filmData)

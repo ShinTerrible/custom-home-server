@@ -25,6 +25,7 @@ export const initialState: ISearchData & Error = {
 	total_founded_rows: 0,
 	search_id: '',
 	error: undefined,
+	isLoading: false
 }
 
 //Thunks
@@ -49,15 +50,20 @@ export const searchData = createSlice({
 	},
 	extraReducers: (builder) => {
 		;(builder
+			.addCase(getSearchData.pending, (state) => {
+				state.isLoading = true
+			})
 			.addCase(getSearchData.fulfilled, (state, { payload }) => {
 				state.rows = payload?.rows
 				state.page = payload?.page
 				state.search_id = payload?.search_id
 				state.total_founded_rows = payload?.total_founded_rows
 				state.total_pages = payload?.total_pages
+				state.isLoading = false
 			})
 			.addCase(getSearchData.rejected, (state, { error }) => {
 				state.error = error.message
+				state.isLoading = false
 			}),
 			builder
 				.addCase(getSearchIdData.fulfilled, (state, { payload }) => {

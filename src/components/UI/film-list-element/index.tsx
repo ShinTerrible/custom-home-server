@@ -51,7 +51,7 @@ export const FilmListItemUI = memo(
 
 							<div className={style.buttonContainer}>
 								<ButtonUI
-									title={''}
+									title={'Скачать'}
 									onClick={(e: SyntheticEvent) => onDownload(e, id)}
 									styleProps={style.downloadButton}
 									svgProps={`${style.filmElementIcon} ${style.iconDownload}`}

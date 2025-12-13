@@ -10,8 +10,14 @@ export const SearchModule: FC = () => {
 	const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 		dispatch(getSearchData(inputValue))
-
 	}
 
-	return <SearchModuleUI onSubmit={handleSubmit} setValue={setInputValue} />
+	const handleSubmitKeyEnter = (e: KeyboardEvent) => {
+		e.preventDefault()
+		if (e.key === 'Enter' || e) {
+			dispatch(getSearchData(inputValue))
+		}
+	}
+
+	return <SearchModuleUI onSubmit={handleSubmit} setValue={setInputValue} onKeyDown={handleSubmitKeyEnter}/>
 }

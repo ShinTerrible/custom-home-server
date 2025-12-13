@@ -21,12 +21,14 @@ import {
 } from '../../slices/film-data/filmData'
 
 import { changeVisibility } from '../../slices/popup/popup'
+import { Preloader } from '../preloader/preloader'
 
 export const FilmListContainer: FC = () => {
 	const dispatch = useDispatch()
 	let films: IFilmData[] | undefined = useSelector(getFilms)
 	let page: number | undefined = useSelector(getPage)
 	let totalPages: number | undefined = useSelector(getTotalPages)
+	const isLoading = useSelector((state) => state.searchData.isLoading)
 	totalPages = totalPages as number
 
 	let searchID: string | undefined = useSelector(getSearchID)
@@ -45,7 +47,7 @@ export const FilmListContainer: FC = () => {
 		navigate(`/${id}`)
 	}
 
-	const onDownload = ( e: SyntheticEvent, id: string) => {
+	const onDownload = (e: SyntheticEvent, id: string) => {
 		dispatch(onDownloadData(id))
 		e.preventDefault()
 		e.stopPropagation()
@@ -59,10 +61,9 @@ export const FilmListContainer: FC = () => {
 	const filmListRender = () => {
 		const searchResultInfo = (
 			<div className={style.filmResultContainer}>
-					<span className={style.filmResultHeader}>Результаты поиска:</span>
-					<Sort/>
+				<span className={style.filmResultHeader}>Результаты поиска:</span>
+				<Sort />
 			</div>
-		
 		)
 
 		const pagination = (
@@ -88,13 +89,18 @@ export const FilmListContainer: FC = () => {
 			)
 		})
 
+		const listWrapper = <div className={style.sizeM}>{list}</div>
 
-		return [searchResultInfo, list, pagination]
+		return [searchResultInfo, listWrapper, pagination]
+	}
+
+	if (isLoading) {
+		return <Preloader />
 	}
 
 	return (
 		<>
-			<ContentContainer styleProps={style.sizeM}>
+			<ContentContainer>
 				{films !== undefined ? filmListRender() : noData}
 			</ContentContainer>
 		</>

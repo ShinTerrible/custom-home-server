@@ -1,7 +1,7 @@
 .popup {
 	position: absolute;
-	right: 15px;
-	bottom: 20px;
+	right: 60px;
+	bottom: 30px;
 	z-index: 10;
 	display: flex;
 	flex-direction: row;
@@ -13,11 +13,38 @@
 	box-shadow: 0 2px 8px var(--grey-border);
 	filter: drop-shadow(0 10px 8px var(--grey-border))
 		drop-shadow(0 4px 3px var(--grey-border));
-	transition: display 0.7s ease-in-out 0.5s;
+	gap: 5px;
+	animation: flyIn 0.55s linear forwards;
+	transform: translateX(0);
+	opacity: 1;
 }
 
-.is-closed {
-	display: none;
+@keyframes flyIn {
+	0% {
+		transform: translateX(150%);
+		opacity: 0;
+	}
+	100% {
+		transform: translateX(0%);
+		opacity: 1;
+	}
+}
+
+.is-closing {
+	animation: flyOut 0.55s linear forwards;
+	pointer-events: none;
+}
+
+/* Анимация скрытия */
+@keyframes flyOut {
+	0% {
+		transform: translateX(0%);
+		opacity: 1;
+	}
+	100% {
+		transform: translateX(150%);
+		opacity: 0;
+	}
 }
 
 .popup-icon {
@@ -30,4 +57,10 @@
 	flex-grow: 2;
 	color: var(--grey-text);
 	font-size: 16px;
+}
+
+@media screen and (width <= 540px) {
+	.popup {
+		right: 15px;
+	}
 }

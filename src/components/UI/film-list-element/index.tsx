@@ -1,6 +1,6 @@
 import style from './styles.module.scss'
 import { ButtonUI } from '../../button/button'
-import { memo, SyntheticEvent } from 'react'
+import { memo, SyntheticEvent, useState } from 'react'
 
 type FilmListProps = {
 	forum: string
@@ -22,6 +22,8 @@ export const FilmListItemUI = memo(
 		onFilmDetails,
 		onDownload,
 	}: FilmListProps) => {
+	const [disabled, setDisabled] = useState(false)
+
 		return (
 			<>
 				<div className={style.filmListItem}>
@@ -52,9 +54,10 @@ export const FilmListItemUI = memo(
 							<div className={style.buttonContainer}>
 								<ButtonUI
 									title={'Скачать'}
-									onClick={(e: SyntheticEvent) => onDownload(e, id)}
+									onClick={(e: SyntheticEvent) => {onDownload(e, id), setDisabled(true)}}
 									styleProps={style.downloadButton}
 									svgProps={`${style.filmElementIcon} ${style.iconDownload}`}
+									disabled={disabled}
 								></ButtonUI>
 							</div>
 						</div>

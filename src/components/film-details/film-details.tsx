@@ -21,7 +21,7 @@ export const FilmDetails: FC = () => {
 		const hidePopup = () => dispatch(changeVisibility(false))
 
 		showPopup()
-		return setTimeout(hidePopup, 4000)
+		return setTimeout(hidePopup, 3000)
 	}
 
 	return (

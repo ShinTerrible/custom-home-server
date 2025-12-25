@@ -1,0 +1,21 @@
+.header {
+	width: 100dvw;
+	max-width: 100%;
+	position: fixed;
+	margin-block-end: 100px;
+	top: 0;
+	left: 0;
+	background: linear-gradient(0deg, rgb(94 201 243), rgb(199 234 248));
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.headerInfo {
+		display: block;
+		margin: auto;
+		color: #6d6d6d;
+		font-weight: 700;
+	}
+}
+

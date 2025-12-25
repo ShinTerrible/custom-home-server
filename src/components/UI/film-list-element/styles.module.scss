@@ -110,6 +110,14 @@
 	background: linear-gradient(0deg, rgb(94 201 243), rgb(199 234 248));
 	backdrop-filter: blur(8px) url(#switcher) saturate(var(150%));
 	-webkit-backdrop-filter: blur(8px) saturate(var(150%));
+	cursor: pointer;
+}
+
+.download-button:disabled {
+	opacity: 0.8;
+	.icon_download {
+		opacity: 0.6;
+	}
 }
 
 .icon_download {

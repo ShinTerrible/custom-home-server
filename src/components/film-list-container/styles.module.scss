@@ -6,22 +6,12 @@
 	text-align: center;
 }
 
-// .size_m {
-// 	display: flex;
-// 	flex-direction: column;
-// 	gap: 15px;
-// 	height: 80dvh;
-// 	overflow: auto;
-// 	-ms-overflow-style: none;
-// 	scrollbar-width: none;
-// }
-
 .size_m {
 	display: flex;
 	box-sizing: border-box;
 	flex-direction: column;
 	gap: 15px;
-	height: 80dvh;
+	height: 72dvh;
 	overflow: auto;
 	-ms-overflow-style: none;
 	scrollbar-width: none;
@@ -40,7 +30,7 @@
 
 @media screen and (width <= 540px) {
 	.size_m {
-		height: 70dvh;
+		height: 65dvh;
 		backdrop-filter: blur();
 	}
 }

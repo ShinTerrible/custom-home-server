@@ -10,12 +10,13 @@
 }
 
 @font-face {
-    font-weight: 400; /* Используйте числовое значение */
-    font-family: 'Comfortaa';
-    font-style: normal;
-    font-display: swap;
-    src: local('Comfortaa Regular'),
-         url('./assets/fonts/Comfortaa-Regular.ttf') format('truetype'); /* Исправленный формат */
+	font-weight: 400; /* Используйте числовое значение */
+	font-family: 'Comfortaa';
+	font-style: normal;
+	font-display: swap;
+	src:
+		local('Comfortaa Regular'),
+		url('./assets/fonts/Comfortaa-Regular.ttf') format('truetype'); /* Исправленный формат */
 }
 
 @font-face {
@@ -38,6 +39,12 @@
 		url('./assets/fonts/Gruppo-Regular.ttf') format('truetype');
 }
 
+.app {
+	max-width: 820px;
+	margin: auto;
+	overflow-x: hidden;
+}
+
 body {
 	box-sizing: border-box;
 	max-width: 620px;
@@ -45,16 +52,11 @@ body {
 	overflow-x: hidden;
 	font-family: var(--font-main);
 	background-color: var(--grey-border);
+	scrollbar-color: rgba(0, 0, 0, 0) transparent;
 }
 
-.app {
-	max-width: 820px;
-	margin: auto;
-	overflow-x: hidden;
-}
-
-@media screen and (width <= 640px) {
+@media screen and (width <= 540px) {
 	.app {
-		overflow: hidden;
+		overflow-x: hidden;
 	}
 }

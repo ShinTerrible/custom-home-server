@@ -1,7 +1,10 @@
 .container {
+	margin-block-start: 100px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	margin: auto;
 	font-family: var(--font-main);
+	overflow-x: hidden;
+	overflow-y: hidden;
 }

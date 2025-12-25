@@ -48,8 +48,14 @@
 }
 
 .image {
-	// width: 100%;
-	// height: 80%;
+	display: block;
+	margin-inline: auto;
+	border-radius: 0.5rem;
+}
+
+.imageF {
+	width: 100%;
+	height: 80%;
 	display: block;
 	margin-inline: auto;
 	border-radius: 0.5rem;

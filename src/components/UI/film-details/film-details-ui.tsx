@@ -62,7 +62,8 @@ export const FilmDetailsUI: FC<TFilmDataProps> = memo(
 
 						<div className={style.imageContainer}>
 							<img
-								className={style.image}
+								className={image_bs64 === null
+										? style.imageF : style.image}
 								alt={`Poster ${title}`}
 								src={
 									image_bs64 === null

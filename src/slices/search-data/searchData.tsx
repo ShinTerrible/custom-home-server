@@ -25,7 +25,8 @@ export const initialState: ISearchData & Error = {
 	total_founded_rows: 0,
 	search_id: '',
 	error: undefined,
-	isLoading: false
+	isLoading: false,
+	disabledFilms: new Map(),
 }
 
 //Thunks
@@ -47,6 +48,17 @@ export const searchData = createSlice({
 			state.rows = payload
 		},
 		resetSearchData: () => initialState,
+		setFilmDisabled: (
+			state,
+			{ payload }: PayloadAction<{ filmId: string; disabled: boolean }>
+		) => {
+			const newMap = new Map(state.disabledFilms)
+			newMap.set(payload.filmId, payload.disabled)
+			state.disabledFilms = newMap
+		},
+		clearDisabledFilms: (state) => {
+			state.disabledFilms.clear()
+		},
 	},
 	extraReducers: (builder) => {
 		;(builder
@@ -85,6 +97,7 @@ export const searchData = createSlice({
 		getTotalPages: (state) => state.total_pages,
 		getSearchID: (state) => state.search_id,
 		getError: (state) => state.error,
+		getDisabledFilms: (state) => state.disabledFilms,
 	},
 })
 
@@ -94,6 +107,13 @@ export const {
 	getPage,
 	getTotalPages,
 	getSearchID,
+	getDisabledFilms,
 } = searchData.selectors
-export const { updateSearchData, resetSearchData } = searchData.actions
+
+export const {
+	updateSearchData,
+	resetSearchData,
+	setFilmDisabled,
+	clearDisabledFilms,
+} = searchData.actions
 export default searchData.reducer

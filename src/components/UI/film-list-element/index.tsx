@@ -1,6 +1,8 @@
 import style from './styles.module.scss'
 import { ButtonUI } from '../../button/button'
-import { memo, SyntheticEvent, useState } from 'react'
+import { memo, SyntheticEvent, useCallback} from 'react'
+import { useDispatch } from '../../../services/store'
+import { setFilmDisabled } from '../../../slices/search-data/searchData'
 
 type FilmListProps = {
 	forum: string
@@ -8,8 +10,9 @@ type FilmListProps = {
 	size: string
 	sids: number
 	id: string
-	onFilmDetails: (e: SyntheticEvent, id: string) => any
+	onFilmDetails: (id: string) => any
 	onDownload: (e: SyntheticEvent, id: string) => any
+	disabledFilms: boolean
 }
 
 export const FilmListItemUI = memo(
@@ -21,17 +24,28 @@ export const FilmListItemUI = memo(
 		id,
 		onFilmDetails,
 		onDownload,
-	}: FilmListProps) => {
-	const [disabled, setDisabled] = useState(false)
+		disabledFilms,
+	}: FilmListProps & { disabledFilms?: boolean }) => {
+		const dispatch = useDispatch()
+
+		const handleDisabled = useCallback(() => {
+			dispatch(setFilmDisabled({ filmId: id, disabled: true }))
+		}, [dispatch, id])
+
+		const handleDownload = useCallback(
+			(e: SyntheticEvent) => {
+				onDownload(e, id)
+				handleDisabled()
+			},
+			[id, onDownload, handleDisabled]
+		)
 
 		return (
 			<>
 				<div className={style.filmListItem}>
 					<div
 						className={style.filmListPosition}
-						onClick={(e) => {
-							onFilmDetails(e, id)
-						}}
+						onClick={() => onFilmDetails(id)}
 					>
 						<h3 id='label' className={style.label}>
 							{label}
@@ -54,10 +68,10 @@ export const FilmListItemUI = memo(
 							<div className={style.buttonContainer}>
 								<ButtonUI
 									title={'Скачать'}
-									onClick={(e: SyntheticEvent) => {onDownload(e, id), setDisabled(true)}}
+									onClick={handleDownload}
 									styleProps={style.downloadButton}
 									svgProps={`${style.filmElementIcon} ${style.iconDownload}`}
-									disabled={disabled}
+									disabled={disabledFilms}
 								></ButtonUI>
 							</div>
 						</div>

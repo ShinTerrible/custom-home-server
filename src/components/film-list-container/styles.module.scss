@@ -30,7 +30,7 @@
 
 @media screen and (width <= 540px) {
 	.size_m {
-		height: 65dvh;
+		height: calc((100dvh - 300px));
 		backdrop-filter: blur();
 	}
 }
@@ -50,6 +50,6 @@
 
 @media screen and (width <= 540px) {
 	.film_result-header {
-		font-size: 14px;
+		font-size: 12px;
 	}
 }

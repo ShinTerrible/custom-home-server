@@ -1,8 +1,7 @@
-import { FilmListItemUI } from '../UI/film-list-element'
 import style from './styles.module.scss'
 import { IFilmData } from '../../utils/api'
 import { useNavigate } from 'react-router-dom'
-import { FC, SyntheticEvent } from 'react'
+import { FC, SyntheticEvent, useCallback, useEffect, useMemo } from 'react'
 import { ContentContainer } from '../container/container'
 import { Sort } from '../sort'
 import { PaginationUI } from '../pagination/paginationUI'
@@ -13,6 +12,7 @@ import {
 	getSearchID,
 	getSearchIdData,
 	getPage,
+	getDisabledFilms,
 } from '../../slices/search-data/searchData'
 import {
 	getFilmView,
@@ -22,12 +22,14 @@ import {
 
 import { changeVisibility } from '../../slices/popup/popup'
 import { Preloader } from '../preloader/preloader'
+import { FilmList } from '../film-list'
 
 export const FilmListContainer: FC = () => {
 	const dispatch = useDispatch()
 	let films: IFilmData[] | undefined = useSelector(getFilms)
 	let page: number | undefined = useSelector(getPage)
 	let totalPages: number | undefined = useSelector(getTotalPages)
+	let disabledFilms = useSelector(getDisabledFilms)
 	const isLoading = useSelector((state) => state.searchData.isLoading)
 	totalPages = totalPages as number
 
@@ -41,24 +43,30 @@ export const FilmListContainer: FC = () => {
 		return
 	}
 
-	const onFilmDetails = (e: SyntheticEvent, id: string) => {
-		dispatch(getFilmView(id))
-		dispatch(setFilmIdData(id))
-		navigate(`/${id}`)
-	}
+	const onFilmDetails = useCallback(
+		(id: string) => {
+			dispatch(getFilmView(id))
+			dispatch(setFilmIdData(id))
+			navigate(`/${id}`)
+		},
+		[navigate]
+	)
 
-	const onDownload = (e: SyntheticEvent, id: string) => {
-		dispatch(onDownloadData(id))
-		e.preventDefault()
-		e.stopPropagation()
-		const showPopup = () => dispatch(changeVisibility(true))
-		const hidePopup = () => dispatch(changeVisibility(false))
+	const onDownload = useCallback(
+		(e: SyntheticEvent, id: string) => {
+			dispatch(onDownloadData(id))
+			e.preventDefault()
+			e.stopPropagation()
+			const showPopup = () => dispatch(changeVisibility(true))
+			const hidePopup = () => dispatch(changeVisibility(false))
 
-		showPopup()
-		return setTimeout(hidePopup, 3000)
-	}
+			showPopup()
+			return setTimeout(hidePopup, 3000)
+		},
+		[navigate]
+	)
 
-	const filmListRender = () => {
+	const filmListRender = useMemo(() => {
 		const searchResultInfo = (
 			<div className={style.filmResultContainer}>
 				<span className={style.filmResultHeader}>Результаты поиска:</span>
@@ -73,26 +81,19 @@ export const FilmListContainer: FC = () => {
 				onUpdatePage={onUpdatePage}
 			/>
 		)
-
-		const list = films?.map((element, index) => {
-			return (
-				<FilmListItemUI
-					key={index}
-					forum={element.forum}
-					label={element.label}
-					size={element.size}
-					sids={element.sids}
-					id={element.content_id}
+		const listWrapper = (
+			<div className={style.sizeM}>
+				<FilmList
+					films={films}
 					onFilmDetails={onFilmDetails}
 					onDownload={onDownload}
+					disabledFilms={disabledFilms}
 				/>
-			)
-		})
-
-		const listWrapper = <div className={style.sizeM}>{list}</div>
+			</div>
+		)
 
 		return [searchResultInfo, listWrapper, pagination]
-	}
+	}, [films, page, totalPages, navigate, disabledFilms])
 
 	if (isLoading) {
 		return <Preloader />
@@ -101,7 +102,7 @@ export const FilmListContainer: FC = () => {
 	return (
 		<>
 			<ContentContainer>
-				{films !== undefined ? filmListRender() : noData}
+				{films !== undefined ? filmListRender : noData}
 			</ContentContainer>
 		</>
 	)

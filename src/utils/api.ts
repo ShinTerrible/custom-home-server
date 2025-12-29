@@ -24,6 +24,7 @@ export type ISearchData = {
 	total_founded_rows: number | undefined
 	search_id: string | undefined
 	isLoading: boolean
+	disabledFilms: Map<string, boolean>
 }
 
 export type IFilmView = {

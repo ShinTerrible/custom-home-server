@@ -5,12 +5,19 @@ import {
 	useDispatch as dispatchHook,
 	useSelector as selectorHook,
 } from 'react-redux'
+import { enableMapSet } from 'immer'
+
+//поддержка Map и Set в Immer
+enableMapSet()
 
 export const store = configureStore({
 	reducer: rootReducer,
 	middleware: (getDefaultMiddleware) =>
 		getDefaultMiddleware({
-			serializableCheck: false,
+			serializableCheck: {
+				ignoredActions: ['searchData/setFilmDisabled'],
+				ignoredPaths: ['searchData.disabledFilms'],
+			},
 		}),
 	// devTools: process.env.NODE_ENV !== 'production',
 })

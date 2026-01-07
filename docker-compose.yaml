@@ -1,0 +1,6 @@
+services:
+  film-finder-app:
+    build: .
+    ports:
+      - "8080:${SERVE_PORT}"
+    container_name: film-finder-app

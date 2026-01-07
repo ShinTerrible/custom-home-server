@@ -10,6 +10,7 @@ COPY ./src ./src
 COPY ./public ./public
 COPY ./webpack ./webpack
 COPY ./tsconfig.json ./tsconfig.json
+COPY ./.env ./.env
 RUN npm run build
 
 FROM build

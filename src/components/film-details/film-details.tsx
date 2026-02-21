@@ -9,14 +9,14 @@ import { changeVisibility } from '../../slices/popup/popup'
 
 
 export const FilmDetails: FC = () => {
-	const { _id } = useParams<Params>()
+	const { id } = useParams()
 
 	const films = useSelector((state) => state.filmData)
 
 	const dispatch = useDispatch()
 
 	const onDownload = () => {
-		dispatch(onDownloadData(films.id))
+		dispatch(onDownloadData(id as string))
 		const showPopup = () => dispatch(changeVisibility(true))
 		const hidePopup = () => dispatch(changeVisibility(false))
 
